@@ -1,0 +1,44 @@
+mysql> use kartik;
+Database changed
+mysql> select * from hospital;
++--------------+--------+------------+----------+---------+--------+------+
+| patient_name | gender | address    | phone_no | disease | dob    | age  |
++--------------+--------+------------+----------+---------+--------+------+
+| kartik       | M      | moggapair  |    93607 | stroke  | 291002 |   18 |
+| keyan        | m      | mogappair  |    94505 | cold    | 290102 |   15 |
+| nattu        | F      | madhavaram |   942438 | cancer  | 230893 |   18 |
++--------------+--------+------------+----------+---------+--------+------+
+3 rows in set (0.00 sec)
+
+mysql> delete from hospital;
+Query OK, 3 rows affected (0.01 sec)
+
+mysql> select * from hospital;
+Empty set (0.00 sec)
+
+mysql> insert into hospital values('kartik','m','mogappair',94459,'cold',291002,19);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from hospital;
++--------------+--------+-----------+----------+---------+--------+------+
+| patient_name | gender | address   | phone_no | disease | dob    | age  |
++--------------+--------+-----------+----------+---------+--------+------+
+| kartik       | m      | mogappair |    94459 | cold    | 291002 |   19 |
++--------------+--------+-----------+----------+---------+--------+------+
+1 row in set (0.00 sec)
+
+mysql> update hospital
+    -> set phone_no=99999
+    -> where patient_name='kartik';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from hospital;
++--------------+--------+-----------+----------+---------+--------+------+
+| patient_name | gender | address   | phone_no | disease | dob    | age  |
++--------------+--------+-----------+----------+---------+--------+------+
+| kartik       | m      | mogappair |    99999 | cold    | 291002 |   19 |
++--------------+--------+-----------+----------+---------+--------+------+
+1 row in set (0.00 sec)
+
+mysql>
