@@ -1,0 +1,121 @@
+mysql> use kartik;
+Database changed
+mysql> select * from hospital:
+    -> select * from hospital;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ':
+select * from hospital' at line 1
+mysql> select * from hospital;
++--------------+--------+------------+----------+---------+--------+------+
+| patient_name | gender | address    | phone_no | disease | dob    | age  |
++--------------+--------+------------+----------+---------+--------+------+
+| kartik       | m      | mogappair  |    99999 | cold    | 291002 |   19 |
+| keyan        | f      | palani     |    94399 | stroke  |  28384 |   18 |
+| nattu        | f      | madhacaram |    94599 | fever   |  28384 |   18 |
++--------------+--------+------------+----------+---------+--------+------+
+3 rows in set (0.00 sec)
+
+mysql> select * from hospital
+    -> where disease in('cold','fever');
++--------------+--------+------------+----------+---------+--------+------+
+| patient_name | gender | address    | phone_no | disease | dob    | age  |
++--------------+--------+------------+----------+---------+--------+------+
+| kartik       | m      | mogappair  |    99999 | cold    | 291002 |   19 |
+| nattu        | f      | madhacaram |    94599 | fever   |  28384 |   18 |
++--------------+--------+------------+----------+---------+--------+------+
+2 rows in set (0.00 sec)
+
+mysql> insert into hospital values('bharath','m','velachery',93456,'cancer',23456,20);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from hospital;
++--------------+--------+------------+----------+---------+--------+------+
+| patient_name | gender | address    | phone_no | disease | dob    | age  |
++--------------+--------+------------+----------+---------+--------+------+
+| bharath      | m      | velachery  |    93456 | cancer  |  23456 |   20 |
+| kartik       | m      | mogappair  |    99999 | cold    | 291002 |   19 |
+| keyan        | f      | palani     |    94399 | stroke  |  28384 |   18 |
+| nattu        | f      | madhacaram |    94599 | fever   |  28384 |   18 |
++--------------+--------+------------+----------+---------+--------+------+
+4 rows in set (0.00 sec)
+
+mysql> select * from hospital
+    -> where disease between('keyan' and 'nattu');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+mysql> where disease between('keyan'and'nattu');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where disease between('keyan'and'nattu')' at line 1
+mysql> where disease between('keyan','nattu');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where disease between('keyan','nattu')' at line 1
+mysql> select * from hospital
+    -> where disease between 'keyan' and 'nattu';
+Empty set (0.01 sec)
+
+mysql> select * from hospital
+    -> where disease between 'keyan' and 'nattu';
+Empty set (0.00 sec)
+
+mysql> select * from hospital
+    -> where disease between 'stroke' and 'fever';
+Empty set (0.00 sec)
+
+mysql> select * from hospital
+    -> where disease between 'stroke' AND 'fever';
+Empty set (0.00 sec)
+
+mysql> where disease between 'cold' AND 'fever';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where disease between 'cold' AND 'fever'' at line 1
+mysql> select * from hospital
+    -> where disease between 'cold' AND 'fever';
++--------------+--------+------------+----------+---------+--------+------+
+| patient_name | gender | address    | phone_no | disease | dob    | age  |
++--------------+--------+------------+----------+---------+--------+------+
+| kartik       | m      | mogappair  |    99999 | cold    | 291002 |   19 |
+| nattu        | f      | madhacaram |    94599 | fever   |  28384 |   18 |
++--------------+--------+------------+----------+---------+--------+------+
+2 rows in set (0.00 sec)
+
+mysql> select * from hospital
+    -> where disease not between 'cold' AND 'fever';
++--------------+--------+-----------+----------+---------+-------+------+
+| patient_name | gender | address   | phone_no | disease | dob   | age  |
++--------------+--------+-----------+----------+---------+-------+------+
+| bharath      | m      | velachery |    93456 | cancer  | 23456 |   20 |
+| keyan        | f      | palani    |    94399 | stroke  | 28384 |   18 |
++--------------+--------+-----------+----------+---------+-------+------+
+2 rows in set (0.00 sec)
+
+mysql> select
+    -> select count(disease) from hospital;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select count(disease) from hospital' at line 2
+mysql> select count(disease) from hospital;
++----------------+
+| count(disease) |
++----------------+
+|              4 |
++----------------+
+1 row in set (0.01 sec)
+
+mysql> select max(age) from hospital;
++----------+
+| max(age) |
++----------+
+|       20 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select min(age) from hospital;
++----------+
+| min(age) |
++----------+
+|       18 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select avg(age) from hospital;
++----------+
+| avg(age) |
++----------+
+|  18.7500 |
++----------+
+1 row in set (0.01 sec)
+
+mysql>
