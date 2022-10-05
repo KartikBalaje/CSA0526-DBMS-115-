@@ -1,0 +1,119 @@
+mysql> use karthik;
+ERROR 1049 (42000): Unknown database 'karthik'
+mysql> use kartik;
+Database changed
+mysql> desc hospital;
++--------------+----------+------+-----+---------+-------+
+| Field        | Type     | Null | Key | Default | Extra |
++--------------+----------+------+-----+---------+-------+
+| patient_name | char(20) | YES  |     | NULL    |       |
+| gender       | char(10) | YES  |     | NULL    |       |
+| address      | char(20) | YES  |     | NULL    |       |
+| phone_no     | int(10)  | YES  |     | NULL    |       |
+| disease      | char(15) | YES  |     | NULL    |       |
+| dob          | int(10)  | YES  |     | NULL    |       |
+| age          | int(10)  | YES  |     | NULL    |       |
++--------------+----------+------+-----+---------+-------+
+7 rows in set (0.02 sec)
+
+mysql> alter table hospital add primary key(patient_name);
+Query OK, 2 rows affected (0.07 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> desc hospital;
++--------------+----------+------+-----+---------+-------+
+| Field        | Type     | Null | Key | Default | Extra |
++--------------+----------+------+-----+---------+-------+
+| patient_name | char(20) | NO   | PRI |         |       |
+| gender       | char(10) | YES  |     | NULL    |       |
+| address      | char(20) | YES  |     | NULL    |       |
+| phone_no     | int(10)  | YES  |     | NULL    |       |
+| disease      | char(15) | YES  |     | NULL    |       |
+| dob          | int(10)  | YES  |     | NULL    |       |
+| age          | int(10)  | YES  |     | NULL    |       |
++--------------+----------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+mysql> alter table hospital add foreign key(age);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> alter table hospital add unique(phone_no);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc hospital;
++--------------+----------+------+-----+---------+-------+
+| Field        | Type     | Null | Key | Default | Extra |
++--------------+----------+------+-----+---------+-------+
+| patient_name | char(20) | NO   | PRI |         |       |
+| gender       | char(10) | YES  |     | NULL    |       |
+| address      | char(20) | YES  |     | NULL    |       |
+| phone_no     | int(10)  | YES  | UNI | NULL    |       |
+| disease      | char(15) | YES  |     | NULL    |       |
+| dob          | int(10)  | YES  |     | NULL    |       |
+| age          | int(10)  | YES  |     | NULL    |       |
++--------------+----------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+mysql> create table doctor
+    -> (doctor_name char(20),
+    -> experience int(5),
+    -> age int(5),
+    -> primary key(address),
+    -> foreign key(age),
+    -> references hospital(age));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '
+references hospital(age))' at line 6
+mysql>  create table customers
+    -> (id int,
+    -> name char(20),
+    -> age int,
+    -> country char(20),
+    -> constraint customersPK PRIMARY KEY(id));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create table orders
+    -> (order_id int,
+    -> item char
+    ->
+    -> item char(20),
+    -> amount int,
+    -> customer_id int,
+    -> constraint ordersPK PRIMARY KEY(order_id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'item char(20),
+amount int,
+customer_id int,
+constraint ordersPK PRIMARY KEY(orde' at line 5
+mysql> create table orders
+    -> (order_id int,
+    -> item char(20),
+    -> amount int,
+    -> customer_id int,
+    -> constraint ordersPK PRIMARY KEY(order_id));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> alter table orders
+    -> add foreign key(customer_id) references customers(id);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc customers;
++---------+----------+------+-----+---------+-------+
+| Field   | Type     | Null | Key | Default | Extra |
++---------+----------+------+-----+---------+-------+
+| id      | int(11)  | NO   | PRI | 0       |       |
+| name    | char(20) | YES  |     | NULL    |       |
+| age     | int(11)  | YES  |     | NULL    |       |
+| country | char(20) | YES  |     | NULL    |       |
++---------+----------+------+-----+---------+-------+
+4 rows in set (0.04 sec)
+
+mysql> desc orders;
++-------------+----------+------+-----+---------+-------+
+| Field       | Type     | Null | Key | Default | Extra |
++-------------+----------+------+-----+---------+-------+
+| order_id    | int(11)  | NO   | PRI | 0       |       |
+| item        | char(20) | YES  |     | NULL    |       |
+| amount      | int(11)  | YES  |     | NULL    |       |
+| customer_id | int(11)  | YES  | MUL | NULL    |       |
++-------------+----------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
