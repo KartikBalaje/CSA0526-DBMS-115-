@@ -1,0 +1,51 @@
+mysql> use kartik;
+Database changed
+mysql> desc hospital;
++--------------+----------+------+-----+---------+-------+
+| Field        | Type     | Null | Key | Default | Extra |
++--------------+----------+------+-----+---------+-------+
+| patient_name | char(20) | NO   | PRI |         |       |
+| gender       | char(10) | YES  |     | NULL    |       |
+| address      | char(20) | YES  |     | NULL    |       |
+| phone_no     | int(10)  | YES  | UNI | NULL    |       |
+| disease      | char(15) | YES  |     | NULL    |       |
+| dob          | int(10)  | YES  |     | NULL    |       |
+| age          | int(10)  | YES  |     | NULL    |       |
++--------------+----------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+mysql> insert into hospital values('nattu','f','madhacaram',94599,'fever',28384,18);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * into hospital;
+ERROR 1327 (42000): Undeclared variable: hospital
+mysql> select * from hospital;
++--------------+--------+------------+----------+---------+--------+------+
+| patient_name | gender | address    | phone_no | disease | dob    | age  |
++--------------+--------+------------+----------+---------+--------+------+
+| kartik       | m      | mogappair  |    99999 | cold    | 291002 |   19 |
+| nattu        | f      | madhacaram |    94599 | fever   |  28384 |   18 |
++--------------+--------+------------+----------+---------+--------+------+
+2 rows in set (0.00 sec)
+
+mysql> select * from hospital where patient_name='nattu';
++--------------+--------+------------+----------+---------+-------+------+
+| patient_name | gender | address    | phone_no | disease | dob   | age  |
++--------------+--------+------------+----------+---------+-------+------+
+| nattu        | f      | madhacaram |    94599 | fever   | 28384 |   18 |
++--------------+--------+------------+----------+---------+-------+------+
+1 row in set (0.01 sec)
+
+mysql> insert into hospital values('keyan','f','palani',94599,'stroke',28384,18);
+ERROR 1062 (23000): Duplicate entry '94599' for key 'phone_no'
+mysql> insert into hospital values('keyan','f','palani',94399,'stroke',28384,18);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from hospital where age=18;_
++--------------+--------+------------+----------+---------+-------+------+
+| patient_name | gender | address    | phone_no | disease | dob   | age  |
++--------------+--------+------------+----------+---------+-------+------+
+| keyan        | f      | palani     |    94399 | stroke  | 28384 |   18 |
+| nattu        | f      | madhacaram |    94599 | fever   | 28384 |   18 |
++--------------+--------+------------+----------+---------+-------+------+
+2 rows in set (0.00 sec)
