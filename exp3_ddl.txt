@@ -1,0 +1,87 @@
+mysql>
+mysql> use kartik;
+Database changed
+mysql> desc hospital;
++--------------+----------+------+-----+---------+-------+
+| Field        | Type     | Null | Key | Default | Extra |
++--------------+----------+------+-----+---------+-------+
+| patient_name | char(20) | NO   | PRI |         |       |
+| gender       | char(10) | YES  |     | NULL    |       |
+| address      | char(20) | YES  |     | NULL    |       |
+| phone_no     | int(10)  | YES  | UNI | NULL    |       |
+| disease      | char(15) | YES  |     | NULL    |       |
+| dob          | int(10)  | YES  |     | NULL    |       |
+| age          | int(10)  | YES  |     | NULL    |       |
++--------------+----------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+mysql> insert into hospital values('kartik','m','mogappair',94505,'cold',290102,15);
+ERROR 1062 (23000): Duplicate entry 'kartik' for key 'PRIMARY'
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql> insert into hospital values('keyan','m','mogappair',94505,'cold',290102,15);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> desc hospital;
++--------------+----------+------+-----+---------+-------+
+| Field        | Type     | Null | Key | Default | Extra |
++--------------+----------+------+-----+---------+-------+
+| patient_name | char(20) | NO   | PRI |         |       |
+| gender       | char(10) | YES  |     | NULL    |       |
+| address      | char(20) | YES  |     | NULL    |       |
+| phone_no     | int(10)  | YES  | UNI | NULL    |       |
+| disease      | char(15) | YES  |     | NULL    |       |
+| dob          | int(10)  | YES  |     | NULL    |       |
+| age          | int(10)  | YES  |     | NULL    |       |
++--------------+----------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> select * from hospital;
++--------------+--------+------------+----------+---------+--------+------+
+| patient_name | gender | address    | phone_no | disease | dob    | age  |
++--------------+--------+------------+----------+---------+--------+------+
+| kartik       | M      | moggapair  |    93607 | stroke  | 291002 |   18 |
+| keyan        | m      | mogappair  |    94505 | cold    | 290102 |   15 |
+| nattu        | F      | madhavaram |   942438 | cancer  | 230893 |   18 |
++--------------+--------+------------+----------+---------+--------+------+
+3 rows in set (0.00 sec)
+
+mysql>
