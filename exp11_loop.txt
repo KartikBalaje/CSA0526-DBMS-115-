@@ -1,0 +1,109 @@
+
+mysql> select items,price,
+    -> if(price<100,'cheaperprice')
+    -> from grocery;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')
+from grocery' at line 2
+mysql> desc JavaLab;
+ERROR 1146 (42S02): Table 'kartik.javalab' doesn't exist
+mysql> use sse;
+Database changed
+mysql> desc JavaLab;
++---------+----------+------+-----+---------+-------+
+| Field   | Type     | Null | Key | Default | Extra |
++---------+----------+------+-----+---------+-------+
+| name    | tinytext | YES  |     | NULL    |       |
+| surname | tinytext | YES  |     | NULL    |       |
+| city    | tinytext | YES  |     | NULL    |       |
++---------+----------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> select items,price,
+    -> if(price<100,'cheaperprice','costlier')
+    -> from grocery;
+ERROR 1146 (42S02): Table 'sse.grocery' doesn't exist
+mysql> use kartik;
+Database changed
+mysql> select items,price,
+    -> if(price<100,'cheaperprice','costlier')
+    -> from grocery;
++---------+-------+-----------------------------------------+
+| items   | price | if(price<100,'cheaperprice','costlier') |
++---------+-------+-----------------------------------------+
+| oil     |    70 | cheaperprice                            |
+| rice    |   200 | costlier                                |
+| shampoo |    80 | cheaperprice                            |
+| maida   |   400 | costlier                                |
++---------+-------+-----------------------------------------+
+4 rows in set (0.00 sec)
+
+
+
+
+DELIMITER //
+CREATE PROCEDURE while_loop()
+   BEGIN
+      DECLARE num INT default 1;
+      DECLARE res Varchar(50) default '';
+      WHILE num < 78125 DO
+         SET res = CONCAT(res,num,',');
+         SET num = num*5;
+      END While;
+      SELECT res;
+   END //
+Query OK, 0 rows affected (0.38 sec)
+DELIMITER ;
+
+
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 14
+Server version: 5.5.62 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> USE KARTIK;
+Database changed
+mysql> DELIMITER //
+mysql> CREATE PROCEDURE while_loop()
+    -> BEGIN
+    -> DECLARE num INT default 1;
+    -> DECLARE res Varchar(50) default '';
+    -> WHILE num < 78125 DO
+    -> SET res = CONCAT(res,num,',');
+    -> SET num = num*5;
+    -> END While;
+    -> SELECT res;
+    -> END //
+ERROR 1304 (42000): PROCEDURE while_loop already exists
+mysql> DELIMITER //
+mysql> CREATE PROCEDURE dbms_loop()
+    -> BEGIN
+    -> DECLARE num INT default 1;
+    -> DECLARE res Varchar(50) default '';
+    -> WHILE num < 78125 DO
+    -> SET res = CONCAT(res,num,',');
+    -> SET num = num*5;
+    -> END While;
+    -> SELECT res;
+    -> END //
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> call dbms_loop();
+    -> //
++----------------------------+
+| res                        |
++----------------------------+
+| 1,5,25,125,625,3125,15625, |
++----------------------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>
