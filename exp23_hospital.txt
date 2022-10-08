@@ -1,0 +1,66 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 24
+Server version: 5.5.62 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql>
+mysql> use kartik;
+Database changed
+mysql> desc hospital;
++--------------+----------+------+-----+---------+-------+
+| Field        | Type     | Null | Key | Default | Extra |
++--------------+----------+------+-----+---------+-------+
+| patient_name | char(20) | NO   | PRI |         |       |
+| gender       | char(10) | YES  |     | NULL    |       |
+| address      | char(20) | YES  |     | NULL    |       |
+| phone_no     | int(10)  | YES  | UNI | NULL    |       |
+| disease      | char(15) | YES  | MUL | NULL    |       |
+| dob          | int(10)  | YES  |     | NULL    |       |
+| age          | int(10)  | YES  |     | NULL    |       |
++--------------+----------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+mysql> insert into hospital values('rajath','m','chennai',23456,'trauma',23123,15);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from hospital;
++--------------+--------+------------+----------+---------+--------+------+
+| patient_name | gender | address    | phone_no | disease | dob    | age  |
++--------------+--------+------------+----------+---------+--------+------+
+| bharath      | m      | velachery  |    93456 | cancer  |  23456 |   20 |
+| kartik       | m      | mogappair  |    99999 | cold    | 291002 |   19 |
+| keyan        | f      | palani     |    94399 | stroke  |  28384 |   18 |
+| nattu        | f      | madhacaram |    94599 | fever   |  28384 |   18 |
+| rajath       | m      | chennai    |    23456 | trauma  |  23123 |   15 |
++--------------+--------+------------+----------+---------+--------+------+
+5 rows in set (0.00 sec)
+
+mysql> desc hm;
++--------------+----------+------+-----+---------+-------+
+| Field        | Type     | Null | Key | Default | Extra |
++--------------+----------+------+-----+---------+-------+
+| patient_name | char(20) | YES  |     | NULL    |       |
+| doctor_name  | char(20) | YES  |     | NULL    |       |
+| disease      | char(10) | YES  |     | NULL    |       |
+| cost         | int(11)  | YES  |     | NULL    |       |
++--------------+----------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from hm;
++--------------+-------------+---------+------+
+| patient_name | doctor_name | disease | cost |
++--------------+-------------+---------+------+
+| bharath      | NULL        | cancer  | NULL |
+| kartik       | NULL        | cold    | NULL |
++--------------+-------------+---------+------+
+2 rows in set (0.00 sec)
+
+mysql>
